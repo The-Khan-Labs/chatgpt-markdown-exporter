@@ -1,9 +1,17 @@
 {
   "manifest_version": 3,
   "name": "ChatGPT Markdown Exporter",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Download MD button for ChatGPT: saves the open thread as a Markdown file in your browser.",
   "homepage_url": "https://github.com/The-Khan-Labs/chatgpt-markdown-exporter",
+  "permissions": ["downloads", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "content_scripts": [
     {
       "matches": [

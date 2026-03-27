@@ -1,19 +1,8 @@
-﻿(() => {
+(() => {
   const BUTTON_ID = "chatgpt-md-export-btn";
   const TOAST_ID = "chatgpt-md-export-toast";
   const STYLE_ID = "chatgpt-md-export-style";
   let remountQueued = false;
-
-  function sanitizeFilename(input) {
-    const fallback = "chatgpt-conversation";
-    const cleaned = (input || fallback)
-      .replace(/[<>:"/\\|?*\u0000-\u001F]/g, "")
-      .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, 120);
-
-    return (cleaned || fallback).replace(/[. ]+$/g, "");
-  }
 
   function escapeInlineText(text) {
     return (text || "")
@@ -342,22 +331,26 @@
     const output = [`# ${title}`, "", meta, "", "---", "", turns.join("\n\n---\n\n")].join("\n");
 
     return {
-      filename: `${sanitizeFilename(title)}.md`,
+      rawTitle: title,
       markdown: normalizeMarkdown(output)
     };
   }
 
-  function downloadMarkdown(filename, content) {
-    const blob = new Blob([content], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    link.style.display = "none";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
+  function requestExportMarkdown(rawTitle, markdown) {
+    return new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage({ type: "EXPORT_MARKDOWN", rawTitle, markdown }, (response) => {
+        const lastErr = chrome.runtime.lastError;
+        if (lastErr) {
+          reject(new Error(lastErr.message));
+          return;
+        }
+        if (!response?.ok) {
+          reject(new Error(response?.error || "Download failed"));
+          return;
+        }
+        resolve(response.filename);
+      });
+    });
   }
 
   function showToast(message, isError = false) {
@@ -442,9 +435,9 @@
     btn.disabled = true;
 
     try {
-      const { filename, markdown } = buildMarkdown();
-      downloadMarkdown(filename, markdown);
-      showToast(`Downloaded ${filename}`);
+      const { rawTitle, markdown } = buildMarkdown();
+      const filename = await requestExportMarkdown(rawTitle, markdown);
+      showToast(`Saved ${filename}`);
     } catch (error) {
       showToast(error?.message || "Export failed.", true);
     } finally {

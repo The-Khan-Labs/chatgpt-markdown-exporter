@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ChatGPT Markdown Exporter — settings</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 1.5rem auto; padding: 0 1rem; line-height: 1.45; }
+    label { display: block; font-weight: 600; margin-top: 1rem; }
+    input[type="text"] { width: 100%; box-sizing: border-box; margin-top: 0.35rem; padding: 0.45rem 0.5rem; font-size: 0.9rem; }
+    .hint { font-size: 0.85rem; color: #444; margin-top: 0.25rem; }
+    .row { margin-top: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    button { margin-top: 1.25rem; padding: 0.5rem 1rem; cursor: pointer; }
+    #status { margin-top: 0.75rem; font-size: 0.9rem; }
+    #status.ok { color: #0d6b2c; }
+    #status.err { color: #a61b1b; }
+  </style>
+</head>
+<body>
+  <h1>ChatGPT Markdown Exporter</h1>
+
+  <label for="filenamePattern">Filename pattern</label>
+  <input id="filenamePattern" type="text" autocomplete="off" spellcheck="false" />
+  <p class="hint">Use <code>{title}</code> (chat title) and <code>{date}</code> (see date format below). Example: <code>{title}_{date}.md</code></p>
+
+  <label for="datePattern">Date format (inside <code>{date}</code>)</label>
+  <input id="datePattern" type="text" autocomplete="off" spellcheck="false" />
+  <p class="hint">Tokens: <code>YYYY</code> year, <code>MM</code> month, <code>DD</code> day, <code>HH</code> hour, <code>mm</code> minutes, <code>ss</code> seconds. Example: <code>YYYY-MM-DD_HH-mm</code></p>
+
+  <div class="row">
+    <input id="askWhereToSave" type="checkbox" />
+    <label for="askWhereToSave" style="margin: 0; font-weight: 500;">Ask where to save (folder &amp; name) each time</label>
+  </div>
+  <p class="hint">When off, Chrome saves straight to your default download folder using the pattern above.</p>
+
+  <button type="button" id="save">Save</button>
+  <div id="status" aria-live="polite"></div>
+
+  <script src="options.js"></script>
+</body>
+</html>
