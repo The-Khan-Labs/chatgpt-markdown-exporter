@@ -1,45 +1,52 @@
 # ChatGPT Markdown Exporter
 
-Lightweight [Manifest V3](https://developer.chrome.com/docs/extensions/mv3/intro/) extension that adds a floating **Download MD** button on ChatGPT and exports the **currently open** conversation to a single Markdown file. All work happens in your browser; nothing is uploaded.
+**Save any open ChatGPT conversation as a clean `.md` file in one click**—right from the thread you’re reading. Built for people who want their chats in Notion, Obsidian, docs, or GitHub without copy-paste marathons.
 
-## Features
+**New on GitHub:** a minimal, modern Chrome extension (Manifest V3) that does one job well: turn the **current** chat into readable Markdown, formatted for real use.
 
-- Per-chat export (only the conversation open on the tab)
-- Local-only processing; no network calls from the extension for export
-- No analytics, telemetry, or remote endpoints
-- Markdown-friendly output: headings, lists, links, fenced code blocks, blockquotes, tables, images
-- Matches: `https://chatgpt.com/*`, `https://chat.openai.com/*`
+## Why we talk about privacy (not “local tech jargon”)
 
-## Install (load unpacked)
+When other tools say *local*, they usually mean *nobody else sees your words*. This extension **does not send your messages to us or to any backend**—there is no server, no analytics hook, no “phone home.” Export happens in your browser when you click **Download MD**, then your file saves like any normal download. We say it plainly because that’s the promise.
 
-1. Clone this repo (or download a release zip).
-2. Open Chrome → **Extensions** (`chrome://extensions`).
-3. Enable **Developer mode**.
-4. Click **Load unpacked** and select the folder that contains `manifest.json` (repo root).
+## What you get
 
-Icons are committed under `icons/`. To regenerate them after edits:
+- **One floating button** on ChatGPT (`chatgpt.com` and `chat.openai.com`)
+- **This chat only**—not your history vault, not other tabs
+- **Rich Markdown**: headings, lists, links, code fences, quotes, tables, images
+- **No accounts, no tracking**—just the extension and your download folder
+
+## Icons—do you need them?
+
+**For you as a user:** Chrome uses icons in the extensions page and menus so the project looks finished and is easy to spot.
+
+**For publishing:** the Chrome Web Store expects proper icons; without them you look incomplete and can hit rejections.
+
+They’re small PNGs in `icons/`. Regenerate anytime:
 
 ```bash
 python3 scripts/gen_icons.py
 ```
 
-## Privacy
+## Install (load unpacked)
 
-Export runs entirely in the page context at click time. Conversation text is not sent to any server by this extension.
+1. Clone [the repo](https://github.com/The-Khan-Labs/chatgpt-markdown-exporter) or download a release zip.
+2. Chrome → **Extensions** → `chrome://extensions`
+3. Turn on **Developer mode**
+4. **Load unpacked** → choose the folder that contains `manifest.json`
 
-## Repository layout
+## Repo layout
 
 | Path | Purpose |
 |------|--------|
-| `manifest.json` | Extension manifest (MV3) |
-| `content.js` | Content script: UI, DOM extraction, Markdown build, download |
-| `icons/` | Toolbar / store icons (16–128 px PNG) |
-| `scripts/gen_icons.py` | Optional icon generator (stdlib only) |
+| `manifest.json` | Manifest V3 config |
+| `content.js` | Button, extract, Markdown build, download |
+| `icons/` | Store- and Chrome-ready PNGs (16–128 px) |
+| `scripts/gen_icons.py` | Optional icon generator (Python stdlib only) |
 | `LICENSE` | MIT |
 
 ## Contributing
 
-Issues and PRs are welcome. Please keep changes scoped (one logical change per PR) and test **Load unpacked** after editing.
+Issues and PRs welcome—keep changes focused and reload the unpacked extension after edits.
 
 ## License
 
