@@ -1,52 +1,39 @@
 # ChatGPT Markdown Exporter
 
-**Save any open ChatGPT conversation as a clean `.md` file in one click**—right from the thread you’re reading. Built for people who want their chats in Notion, Obsidian, docs, or GitHub without copy-paste marathons.
+Small Chrome extension: floating **Download MD** on ChatGPT, dumps the **conversation you have open** into one Markdown file.
 
-**New on GitHub:** a minimal, modern Chrome extension (Manifest V3) that does one job well: turn the **current** chat into readable Markdown, formatted for real use.
+Works on `chatgpt.com` and `chat.openai.com`.
 
-## Why we talk about privacy (not “local tech jargon”)
+**Privacy, in plain terms:** the extension doesn’t call our servers (there aren’t any). It reads the page and triggers a normal browser download. Your text isn’t “uploaded” anywhere by this thing.
 
-When other tools say *local*, they usually mean *nobody else sees your words*. This extension **does not send your messages to us or to any backend**—there is no server, no analytics hook, no “phone home.” Export happens in your browser when you click **Download MD**, then your file saves like any normal download. We say it plainly because that’s the promise.
+## Install (unpacked)
 
-## What you get
+1. Clone or download the repo.
+2. Open `chrome://extensions`, turn on **Developer mode**.
+3. **Load unpacked** → pick this folder (the one with `manifest.json`).
 
-- **One floating button** on ChatGPT (`chatgpt.com` and `chat.openai.com`)
-- **This chat only**—not your history vault, not other tabs
-- **Rich Markdown**: headings, lists, links, code fences, quotes, tables, images
-- **No accounts, no tracking**—just the extension and your download folder
+## Icons
 
-## Icons—do you need them?
+Chrome wants icon files for the extensions page and (if you ship it) the Web Store. They live in `icons/`. You don’t make them yourself unless you’re changing the look.
 
-**For you as a user:** Chrome uses icons in the extensions page and menus so the project looks finished and is easy to spot.
+## Python?
 
-**For publishing:** the Chrome Web Store expects proper icons; without them you look incomplete and can hit rejections.
+**You don’t need Python to use the extension.**  
 
-They’re small PNGs in `icons/`. Regenerate anytime:
+There’s a helper script, `scripts/gen_icons.py`, that rebuilds those PNGs if you ever replace the art and need new sizes. It uses only the Python that ships on most systems—no pip install. Ignore it if you don’t care.
 
 ```bash
 python3 scripts/gen_icons.py
 ```
 
-## Install (load unpacked)
+## Layout
 
-1. Clone [the repo](https://github.com/The-Khan-Labs/chatgpt-markdown-exporter) or download a release zip.
-2. Chrome → **Extensions** → `chrome://extensions`
-3. Turn on **Developer mode**
-4. **Load unpacked** → choose the folder that contains `manifest.json`
-
-## Repo layout
-
-| Path | Purpose |
-|------|--------|
-| `manifest.json` | Manifest V3 config |
-| `content.js` | Button, extract, Markdown build, download |
-| `icons/` | Store- and Chrome-ready PNGs (16–128 px) |
-| `scripts/gen_icons.py` | Optional icon generator (Python stdlib only) |
-| `LICENSE` | MIT |
-
-## Contributing
-
-Issues and PRs welcome—keep changes focused and reload the unpacked extension after edits.
+| | |
+|---|---|
+| `manifest.json` | MV3 manifest |
+| `content.js` | Button + scrape + Markdown + download |
+| `icons/` | PNGs referenced by the manifest |
+| `scripts/gen_icons.py` | Optional regenerator for icons |
 
 ## License
 
