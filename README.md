@@ -14,7 +14,7 @@ Works on `chatgpt.com` and `chat.openai.com`.
 
 ## Icons
 
-Chrome wants icon files for the extensions page and (if you ship it) the Web Store. They live in `icons/`. You don’t make them yourself unless you’re changing the look.
+Chrome uses these on `chrome://extensions` (the tile next to the name). They’re in `icons/`. Swap them if you want a different look.
 
 ## Python?
 
