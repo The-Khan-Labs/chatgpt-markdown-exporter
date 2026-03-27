@@ -1,0 +1,18 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+
+# Local test artifacts
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.Python
+.venv/
+venv/
+
+# Packed extension builds
+*.zip
+*.crx
+*.pem
