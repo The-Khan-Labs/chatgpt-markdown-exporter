@@ -18,29 +18,13 @@ Works on `chatgpt.com` and `chat.openai.com`.
 2. Open `chrome://extensions`, turn on **Developer mode**.
 3. **Load unpacked** → pick this folder (the one with `manifest.json`).
 
-## Icons
-
-Chrome uses these on `chrome://extensions` (the tile next to the name). They’re in `icons/`. Swap them if you want a different look.
-
-## Python?
-
-**You don’t need Python to use the extension.**  
-
-There’s a helper script, `scripts/gen_icons.py`, that rebuilds those PNGs if you ever replace the art and need new sizes. It uses only the Python that ships on most systems—no pip install. Ignore it if you don’t care.
-
-```bash
-python3 scripts/gen_icons.py
-```
-
 ## Layout
 
 | | |
 |---|---|
 | `manifest.json` | Extension config (Manifest V3) |
 | `content.js` | Button + scrape + Markdown + download |
-| `icons/` | PNGs referenced by the manifest |
-| `scripts/gen_icons.py` | Optional regenerator for icons |
-| `screenshot-download-md.png` | Repo screenshot of the button |
+| `screenshot-download-md.png` | Screenshot of the button |
 
 ## License
 
